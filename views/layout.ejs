@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box;}
+        body { background: #f8f9fa; color: #222; font-family: 'Noto Sans KR', Arial, sans-serif; }
+        header, footer { background: #fff; border-bottom: 1px solid #eee; padding: 1rem 0; text-align: center; }
+        nav { margin-top: 0.5rem; }
+        nav a { margin: 0 0.5rem; color: #007bff; text-decoration: none; font-weight: 500; }
+        nav a:hover { text-decoration: underline; }
+        main { width: 100vw; height: 640px; overflow: scroll; margin: 2rem auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); padding: 2rem; }
+        footer {  position: absolute; bottom: 0;  border-top: 1px solid #eee; font-size: 0.95rem; color: #888; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="font-size:1.7rem; font-weight:700; margin-bottom:0.3em; color: black;">🛍️ My Shopping Mall</h1>
+        <nav>
+            <a href="/">홈</a>
+            <a href="/item">상품</a>
+            <a href="/cart">장바구니</a>
+            <% if (user) { %>
+                <span style="color:#333; font-weight:400;"><%= user.username %>님</span>
+                <a href="/user/logout">로그아웃</a>
+                <% if (user.isAdmin) { %>
+                    <a href="/admin">관리자</a>
+                <% } %>
+            <% } else { %>
+                <a href="/user/login">로그인</a>
+                <a href="/user/register">회원가입</a>
+            <% } %>
+        </nav>
+    </header>
+    <main>
+        <%- body %>
+    </main>
+    <footer>
+        ⓒ 2025 Shopping Mall. All rights reserved.
+    </footer>
+</body>
+</html>

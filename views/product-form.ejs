@@ -1,0 +1,17 @@
+<% layout('layout') %>
+<h2><%= item ? '상품 수정' : '상품 등록' %></h2>
+<form action="<%= item ? '/item/admin/edit/' + item._id : '/item/admin/new' %>" method="POST" class="form-box">
+    <label>상품명</label>
+    <input type="text" name="name" value="<%= item ? item.name : '' %>" required />
+    <label>가격</label>
+    <input type="number" name="price" value="<%= item ? item.price : '' %>" required />
+    <label>이미지 URL</label>
+    <input type="text" name="image" value="<%= item ? item.image : '' %>" />
+    <label>설명</label>
+    <input type="text" name="description" value="<%= item ? item.description : '' %>" />
+    <label>재고</label>
+    <input type="number" name="stock" value="<%= item ? item.stock : '' %>" required />
+    <label>카테고리</label>
+    <input type="text" name="category" value="<%= item ? item.category : '' %>" />
+    <button type="submit"><%= item ? '수정' : '등록' %></button>
+</form> 

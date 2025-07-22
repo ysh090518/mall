@@ -1,0 +1,39 @@
+<% layout('layout') %>
+<h2>상품 목록</h2>
+<% if (user && user.isAdmin) { %>
+    <a href="/item/admin/new" class="admin-btn" style="margin-bottom:1.5rem; display:inline-block;">상품 등록</a>
+<% } %>
+<div class="product-grid">
+    <% if (items && items.length > 0) { %>
+        <% items.forEach(product => { %>
+            <div class="product-card">
+                <div class="product-thumb">
+                    <% if (product.image) { %>
+                        <img src="<%= product.image %>" alt="<%= product.name %>" />
+                    <% } else { %>
+                        <span class="no-image">이미지 없음</span>
+                    <% } %>
+                </div>
+                <div class="product-info">
+                    <h3><a href="/item/<%= product._id %>"><%= product.name %></a></h3>
+                    <div style="color:#007bff; font-weight:500; margin:0.3em 0 0.5em 0; font-size:1.05rem;"><%= product.price %>원</div>
+                    <div style="color:#888; font-size:0.97rem; min-height:2.2em;"><%= product.description %></div>
+                    <div style="font-size:0.97rem; color:#666; margin-bottom:0.3em;">카테고리: <%= product.category || '-' %></div>
+                    <div style="font-size:0.97rem; color:#666; margin-bottom:0.3em;">재고: <%= product.stock %>개</div>
+                    <form action="/cart/add" method="POST" class="add-cart-form">
+                        <input type="hidden" name="productId" value="<%= product._id %>" />
+                        <button type="submit">장바구니 담기</button>
+                    </form>
+                    <% if (user && user.isAdmin) { %>
+                        <a href="/item/admin/edit/<%= product._id %>" class="admin-btn" style="margin-top:0.5rem;">수정</a>
+                        <form action="/item/admin/delete/<%= product._id %>" method="POST" style="display:inline;">
+                            <button type="submit" style="background:#d32f2f; margin-top:0.5rem;">삭제</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>등록된 상품이 없습니다.</p>
+    <% } %>
+</div> 

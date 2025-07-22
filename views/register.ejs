@@ -1,0 +1,23 @@
+<% layout('layout') %>
+<h2 style="margin-bottom:1.5rem;">회원가입</h2>
+<% if (typeof error !== 'undefined' && error) { %>
+    <div style="color:#d32f2f; margin-bottom:1rem; font-size:0.98rem;"> <%= error %> </div>
+<% } %>
+<form action="/user/register" method="POST" class="form-box">
+    <label>사용자명 <span style="color:#888; font-size:0.95em;">(중복 불가)</span></label>
+    <input type="text" name="username" required placeholder="사용자명을 입력하세요">
+
+    <label>생년월일</label>
+    <input type="date" name="birth" required>
+
+    <label>성별</label>
+    <div style="margin-bottom:1em;">
+        <label style="margin-right:1em;"><input type="radio" name="gender" value="M" required> 남자</label>
+        <label><input type="radio" name="gender" value="F"> 여자</label>
+    </div>
+
+    <label>비밀번호</label>
+    <input type="password" name="password" required placeholder="비밀번호를 입력하세요">
+
+    <button type="submit">회원가입</button>
+</form>

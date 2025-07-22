@@ -1,0 +1,22 @@
+<% layout('layout') %>
+<h2 style="margin-bottom:1.5rem;">장바구니</h2>
+<% if (cart && cart.length > 0) { %>
+    <ul style="list-style:none; padding:0;">
+        <% cart.forEach(item => { %>
+            <li style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #eee; padding:1rem 0;">
+                <div>
+                    <strong><%= item.name %></strong>
+                    <span style="color:#888; margin-left:0.7em;"><%= item.price %>원 x <%= item.quantity %></span>
+                </div>
+                <form action="/cart/remove" method="POST" style="margin:0;">
+                    <input type="hidden" name="productId" value="<%= item.id %>" />
+                    <button type="submit" style="padding:0.4em 1em; border-radius:4px; border:none; background:#d32f2f; color:#fff;">삭제</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+    <p style="margin-top:1.5rem; font-weight:500;">총합계: <%= totalPrice %>원</p>
+    <button onclick="location.href='/checkout'" style="margin-top:1rem; padding:0.6em 2em; border-radius:4px; border:none; background:#007bff; color:#fff;">결제하기</button>
+<% } else { %>
+    <p style="color:#888;">장바구니가 비어 있습니다.</p>
+<% } %>

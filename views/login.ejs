@@ -1,0 +1,14 @@
+<% layout('layout') %>
+<h2 style="margin-bottom:1.5rem;">로그인</h2>
+<% if (typeof error !== 'undefined' && error) { %>
+    <div style="color:#d32f2f; margin-bottom:1rem; font-size:0.98rem;"> <%= error %> </div>
+<% } %>
+<form action="/user/login" method="POST" class="form-box">
+    <label>사용자명</label>
+    <input type="text" name="username" required placeholder="사용자명을 입력하세요">
+
+    <label>비밀번호</label>
+    <input type="password" name="password" required placeholder="비밀번호를 입력하세요">
+
+    <button type="submit">로그인</button>
+</form>
